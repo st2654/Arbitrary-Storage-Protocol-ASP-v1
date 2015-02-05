@@ -35,7 +35,7 @@ will result in a Ready code.
 The GET method is the means by which a client requests data associated with the
 supplied key to be returned:
 
-   "GET" <space> <length> <space> <key> <newline>
+   "GET" [space] [length] [space] [key] [newline]
 
 The server will respond with either the requested data and a Ready code or an
 error code.  On success, the server immediately begins sending the data
@@ -53,7 +53,7 @@ codes:
 The CLEAR method removes a key and its associated data from the server's
 consideration.  It is specified as follows:
 
-   "CLEAR" <space> <key> <newline>
+   "CLEAR" [space] [key] [newline]
 
 And may return one of the following codes:
 
@@ -107,41 +107,70 @@ The following is an example session between client and server.  Server sent
 information is prepended by S: and client send information by C:
 
    S: 000
+   
    C: PUT 13 foo
+   
    S: 001
+   
    C: Hello, world!
+   
    C: .
+   
    S: 000
+   
    C: PUT 8 bar
+   
    S: 001
+   
    C: Rutabaga!
    C: .
+   
    S: 000
+   
    C: FEED dog
+   
    S: 100
+   
    C: GET 8 bar
+   
    S: Rutabaga
+   
    S: 000
+   
    C: CLEAR foo
+   
    S: 000
+   
    C: CLEAR foo
+   
    S: 102
+   
    C: PUT 8 foo
+   
    S: 001
+   
    C: I am new data in foo!
+   
    C: .
+   
    S: 000
+   
    C: GET 12 foo
+   
    S: 101
+   
    C: QUIT
-
-
+   
 4. ABNF Definitions
 
    <space>   = %x20 ; sp
+   
    <newline> = %x0a ; nl
+   
    <period>  = %x2e ; .
+   
    <key>     = ALPHA / DIGIT
+   
    <length>  = DIGIT
 
 
