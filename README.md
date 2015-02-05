@@ -16,7 +16,7 @@ The PUT method is the means by which a client requests data of an indicated
 length (indicated in decimal integer bytes) be stored by the server under the
 supplied key:
 
-   "PUT" <space> <length> <space> <key> <newline>
+   "PUT" [space] [length] [space] [key] [newline]
 
 The server will respond with one of the following codes:
 
